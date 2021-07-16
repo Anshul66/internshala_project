@@ -43,7 +43,7 @@ if (mysqli_num_rows($result) > 0) {
 <tr>
 <td>Name</td>
 <td>Resquested Sample</td>
-<td>Aadhaar No</td>
+<td>Email</td>
 </tr>
 <?php
 $i=0;
@@ -52,7 +52,7 @@ while($row = mysqli_fetch_array($result)) {
 <tr>
 <td><?php echo $row["username"]; ?></td>
 <td><?php echo $row["sample"]; ?></td>
-<td><?php echo $row["aadhaar"]; ?></td>
+<td><?php echo $row["email"]; ?></td>
 </tr>
 <?php
 $i++;
