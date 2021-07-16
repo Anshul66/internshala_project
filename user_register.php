@@ -1,6 +1,6 @@
 <?php
 // Include connection file
-require_once "connection.php";
+require_once "../internshala/connection.php";
  
 // Define variables and initialize with empty values
 $username = $password = $blood = $confirm_password = "";
@@ -151,9 +151,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="submit" class="btn btn-primary" value="Submit">
                 <input type="reset" class="btn btn-secondary ml-2" value="Reset">
             </div>
-            <p>Don't have a Hospital account? <a href="hospital_register.php">Sign up now as a Hospital.</a>.</p>
-            <p>Already have a USER account? <a href="user_login.php">Login here as a USER</a>.</p>
-            <p>Already have a Hospital account? <a href="hospital_login.php">Login here as a Hospital</a>.</p>
+            <p>Don't have a Hospital account? <a href="../internshala/hospital_register.php">Sign up now as a Hospital.</a>.</p>
+            <p>Already have a USER account? <a href="../internshala/user_login.php">Login here as a USER</a>.</p>
+            <p>Already have a Hospital account? <a href="../internshala/hospital_login.php">Login here as a Hospital</a>.</p>
 
         </form>
     </div>    
