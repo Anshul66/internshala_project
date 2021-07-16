@@ -102,7 +102,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <body>
 
         <div class="p-5 text-center bg-light">
-                <h4 class="mb-3">BLOOD BANK APPLICATION</h4></div>
+                <h4 class="mb-3">BLOOD BANK APPLICATION<br>you can login/singup as a Hospital Account.<br>OR you can login/singup as a User Account.</h4></div>
                 <div class="col-md-4 mx-auto">
 <div class="wrapper">
         <h2>Hospital Login</h2>
