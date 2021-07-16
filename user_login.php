@@ -4,7 +4,7 @@ session_start();
  
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: user_welcome.php");
+    header("location: index.php");
     exit;
 }
  
@@ -64,7 +64,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["username"] = $username;                            
                             
                             // Redirect user to welcome page
-                            header("location: User_welcome.php");
+                            header("location: index.php");
                         } else{
                             // Password is not valid, display a generic error message
                             $login_err = "Invalid username or password.";
@@ -102,11 +102,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <body>
 
         <div class="p-5 text-center bg-light">
-                <h4 class="mb-3">BLOOD BANK APPLICATION</h4></div>
+                <h4 class="mb-3">BLOOD BANK APPLICATION<br>you can login/singup as a Hospital Account.<br>OR you can login/singup as a User Account.</h4></div>
                 <div class="col-md-4 mx-auto">
 <div class="wrapper">
         <h2>User Login</h2>
-        <p>Please fill in your credentials to login as a Hospital.</p>
+        <p>Please fill in your credentials to login as a User.</p>
 
         <?php 
         if(!empty($login_err)){
@@ -116,7 +116,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group">
-                <label>Hospital name</label>
+                <label>User name</label>
                 <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
                 <span class="invalid-feedback"><?php echo $username_err; ?></span>
             </div>    
