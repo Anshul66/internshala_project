@@ -3,8 +3,8 @@
 require_once "connection.php";
  
 // Define variables and initialize with empty values
-$username = $sample = $aadhaar = "";
-$username_err = $sample_err = $aadhaar_err = "";
+$username = $sample = $email = "";
+$username_err = $sample_err = $email_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -13,7 +13,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty(trim($_POST["username"]))){
         $username_err = "Please enter a Hospital name.";
     } elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["username"]))){
-        $username_err = "Hospital name can only contain letters, numbers, and underscores.";
+        $username_err = "name can only contain letters, numbers, and underscores.";
     } else{
         // Prepare a select statement
         $sql = "SELECT id FROM internshala_login WHERE username = ?";
@@ -51,35 +51,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $sample = trim($_POST["sample"]);
     }
 
-    // Validate aadhaar
-    if(empty(trim($_POST["aadhaar"]))){
-        $aadhaar_err = "Please enter the Aadhaar No";     
-    } elseif(strlen(trim($_POST["aadhaar"])) < 12){
-        $aadhaar_err = "Aadhaar No must have atleast 12 characters.";
+    // Validate email
+    if(empty(trim($_POST["email"]))){
+        $email_err = "Please enter the email";     
     } else{
-        $aadhaar = trim($_POST["aadhaar"]);
+        $email = trim($_POST["email"]);
     }
     
     
     // Check input errors before inserting in database
-    if(empty($username_err) && empty($sample_err) && empty($aadhaar_err)){
+    if(empty($username_err) && empty($sample_err) && empty($email_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO sample (username, sample, aadhaar ) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO sample (username, sample, email ) VALUES (?, ?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_sample, $param_aadhaar);
-            
+            mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_sample, $param_email);
+             
             // Set parameters
             $param_username = $username;
             $param_sample = $sample;
-            $param_aadhaar = $aadhaar;
+            $param_email = $email;
             
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to login page
-                header("location: hospital_login.php");
+                header("location: index.php");
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
             }
@@ -126,15 +124,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <span class="invalid-feedback"><?php echo $sample_err; ?></span>
             </div>
             <div class="form-group">
-                <label>Addhaar No</label>
-                <input type="text" name="aadhaar" class="form-control <?php echo (!empty($aadhaar_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $aadhaar; ?>">
-                <span class="invalid-feedback"><?php echo $aadhaar_err; ?></span>
+                <label>Email</label>
+                <input type="email" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
+                <span class="invalid-feedback"><?php echo $email_err; ?></span>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">
                 <input type="reset" class="btn btn-secondary ml-2" value="Reset">
             </div>
-            <a class="btn btn-link ml-2" href="user_welcome.php">Cancel</a>
+            <a class="btn btn-link ml-2" href="index.php">Cancel</a>
 
         </form>
     </div>    
